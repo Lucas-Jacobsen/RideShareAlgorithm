@@ -1,14 +1,11 @@
-import { useEffect, useRef } from 'react';
-import './App.css';
 
-function App() {
-  interface AutocompleteOptions {
+interface AutocompleteOptions {
     placeholder: string;
   }
 
   type AutocompleteCallback = (data: string | null) => void;
 
-  function addressAutocomplete(containerElement: HTMLElement, callback: AutocompleteCallback, options: AutocompleteOptions): void {
+function addressAutocomplete(containerElement: HTMLElement, callback: AutocompleteCallback, options: AutocompleteOptions): void {
     const MIN_ADDRESS_LENGTH = 3;
     const DEBOUNCE_DELAY = 300;
 
@@ -156,26 +153,4 @@ function App() {
     }
   }
 
-  const autocompleteContainerRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    if (autocompleteContainerRef.current) {
-      addressAutocomplete(autocompleteContainerRef.current, (data) => {
-        console.log("Selected option: ");
-        console.log(data);
-      }, {
-        placeholder: "Enter an address here"
-      });
-    }
-  }, []); // Run this effect only once when the component mounts
-
-  return (
-    <>
-      <h1>Ride Share Algorithm</h1>
-
-      <div className="autocomplete-container" ref={autocompleteContainerRef}></div>
-    </>
-  );
-}
-
-export default App;
+  export default addressAutocomplete;
